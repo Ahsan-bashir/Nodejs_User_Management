@@ -4,4 +4,5 @@ const customerController=require('../controllers/customerController')
 
 // customer routes
 Router.get('/',customerController.homepage)
+Router.get('/add',customerController.addCustomer)
 module.exports=Router;
