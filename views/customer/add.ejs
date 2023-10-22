@@ -15,7 +15,6 @@
                     <li class="breadcrumb-item"> <a href="/"> Dashboard</a></li>
                     <li class="breadcrumb-item active">New Customer</li>
                 </ol>
-
             </nav>
         </div>
         <div class="col text-end fw-lighter">
@@ -23,3 +22,40 @@
         </div>
     </div>
 </div>
+
+<form action="/add" method="POST">
+    <!-- row 1 -->
+    <div class="row form-group mb-4">
+        <div class="col">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" placeholder="First Name" id="firstName" name="firstName" value=""
+                required>
+        </div>
+        <div class="col">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" placeholder="Last Name" id="lastName" name="lastName" value=""
+                required>
+        </div>
+    </div>
+    <!-- row 2 -->
+    <div class="row form-group mb-4">
+        <div class="col">
+            <label for="tel">Telephone</label>
+            <input type="text" class="form-control" placeholder="Telephone" id="tel" name="tel" value="" required>
+        </div>
+        <div class="col">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" placeholder="Email" id="email" name="email" value="" required>
+        </div>
+    </div>
+    <!-- row 3 -->
+    <div class="row form-group mb-4 ">
+        <label for="details">Customer Details</label>
+        <textarea name="details" id="details" cols="30" rows="12" placeholder="Customer Details"></textarea>
+    </div>
+
+
+        <button type="submit" class="btn btn-primary"> Add Customer</button>
+  
+
+</form>
