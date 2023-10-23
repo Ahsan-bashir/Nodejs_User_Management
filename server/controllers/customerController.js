@@ -4,11 +4,12 @@ const Customer = require('../models/customer');
 // homepage
 
 exports.homepage = async (req, res) => {
+    const messages=await req.consumeFlash('info');
     const locals = {
         title: "Nodejs",
         description: "Nodejs User Mangement System"
     }
-    res.render('index', locals)
+    res.render('index', {locals,messages})
 }
 // GET /
 // New Customer Form
@@ -229,6 +230,7 @@ exports.postCustomer = async (req, res) => {
     });
     try {
         await Customer.create(newCustomer);
+        await req.flash('info','New Customer Added Successfully')
         res.redirect('/');
     } catch (error) {
         console.log(error);
