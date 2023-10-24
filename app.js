@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const expressLayout = require('express-ejs-layouts')
-const flash =require('express-flash-message')
+const connectFlash = require('connect-flash');
 const session=require('express-session')
 const connectDB=require('./server/config/db')
 
@@ -29,8 +29,9 @@ app.use(
 
     })
 )
+
 // Flash Message 
-app.use(flash({ sessionKeyName: 'flashMessage' }));
+app.use(connectFlash());
 
 // Set Templating Engine
 app.use(expressLayout);
