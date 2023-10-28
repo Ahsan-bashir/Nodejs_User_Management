@@ -1,11 +1,10 @@
+const connectDB = require('../config/db');
 const Customer = require('../models/customer');
-const { connect } = require('../routes/customer');
 
 // GET /
 // homepage
-
 exports.homepage = async (req, res) => {
-    const messages=await connect-flash.getMessages();
+    const messages =    await req.flash('info')
     const locals = {
         title: "Nodejs",
         description: "Nodejs User Mangement System"
@@ -231,7 +230,8 @@ exports.postCustomer = async (req, res) => {
     });
     try {
         await Customer.create(newCustomer);
-        await connect-flash.info('New Customer Added Successfully.');
+        //  connectFlash.info('New Customer Added Successfully.')
+         await req.flash('info','New Customer Added Successfully')
         // await req.flash('info','New Customer Added Successfully')
         res.redirect('/');
     } catch (error) {
