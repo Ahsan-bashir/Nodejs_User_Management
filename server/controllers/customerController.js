@@ -1,16 +1,58 @@
 const connectDB = require('../config/db');
 const Customer = require('../models/customer');
-
 // GET /
 // homepage
+
+
 exports.homepage = async (req, res) => {
     const messages =    await req.flash('info')
     const locals = {
         title: "Nodejs",
         description: "Nodejs User Mangement System"
     }
-    res.render('index', {locals,messages})
+
+const perPage=12;
+const page=req.query.page || 1; 
+
+    try {
+        
+        const customers = await Customer.aggregate([{  $sort:{updatedAt:-1}  }])
+        .skip((perPage*page)-perPage)
+        .limit(perPage)
+        .exec();
+
+        // .skip(perPage*(page-perPage))
+        // .limit(perPage)
+        // .exec();
+        const count=await Customer.count();    
+
+        res.render('index',{
+            locals,
+            customers,
+            current:page,
+            pages:Math.ceil(count/perPage),
+            messages
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
 }
+
+
+// exports.homepage = async (req, res) => {
+//     const messages =    await req.flash('info')
+//     const locals = {
+//         title: "Nodejs",
+//         description: "Nodejs User Mangement System"
+//     }
+//     try {
+//         const Customers=await Customer.find({}).limit(22);
+//         res.render('index', {locals,messages,Customers})
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 // GET /
 // New Customer Form
 
@@ -231,7 +273,7 @@ exports.postCustomer = async (req, res) => {
     try {
         await Customer.create(newCustomer);
         //  connectFlash.info('New Customer Added Successfully.')
-         await req.flash('info','New Customer Added Successfully')
+         await req.flash('info','New Customer Added Successfully !!!')
         // await req.flash('info','New Customer Added Successfully')
         res.redirect('/');
     } catch (error) {

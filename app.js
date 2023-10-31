@@ -31,7 +31,7 @@ app.use(
 )
 
 // Flash Message 
-expressLayout.use(flash())
+app.use(flash());
 
 // Set Templating Engine
 app.use(expressLayout);
