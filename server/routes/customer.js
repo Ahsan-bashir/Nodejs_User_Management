@@ -6,4 +6,6 @@ const customerController=require('../controllers/customerController')
 Router.get('/',customerController.homepage)
 Router.get('/add',customerController.addCustomer)
 Router.post('/add',customerController.postCustomer)
+
+Router.get('/view/:id',customerController.view)
 module.exports=Router;

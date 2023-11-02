@@ -30,6 +30,7 @@ const customerSchema=new Schema({
    },
    details:{
         type:String,
+        required:true
     }
 })
 
