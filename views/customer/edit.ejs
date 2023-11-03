@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-between flex-wrap nowrap flex-md align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Editing <%= customer.firstName%> <%= customer.lastName%></h1>
+    <div class="btn-toolbar mb-2 mb-md 0">
+        <div class="btn-group me-2">
+            <a href="/add" class="btn btn-sm btn-ouline-secondary">?</a>
+        </div>
+    </div>
+</div>
+
+<div class="col py-3">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb-item">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active"><%= customer.firstName%>  <%= customer.lastName%></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col text-end fw-lighter">
+            <b>Last Updated : <%=new Data(customer.updatedAt).toUTCString() %></b>
+            <b>UserId : </b><%= customer._id %>
+        </div>
+    </div>
+</div>
+
+<form action="/edit/<%= customer._id>?_method=PUT" method="POST">
+    <!-- row 1 -->
+    <div class="row form-group mb-4">
+        <div class="col">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" placeholder="First Name" id="firstName" name="firstName" value=" <%= customer.firstName %>"
+                required>
+        </div>
+        <div class="col">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" placeholder="Last Name" id="lastName" name="lastName" value=" <%= customer.firstName %> "
+                required>
+        </div>
+    </div>
+    <!-- row 2 -->
+    <div class="row form-group mb-4">
+        <div class="col">
+            <label for="tel">Telephone</label>
+            <input type="text" class="form-control" placeholder="Telephone" id="tel" name="tel" value="" required>
+        </div>
+        <div class="col">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" placeholder="Email" id="email" name="email" value="" required>
+        </div>
+    </div>
+    <!-- row 3 -->
+    <div class="row form-group mb-4 ">
+        <label for="details">Customer Details</label>
+        <textarea name="details" id="details" cols="30" rows="12" placeholder="Customer Details"></textarea>
+    </div>
+
+
+        <button type="submit" class="btn btn-primary"> Add Customer</button>
+  
+
+</form>

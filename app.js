@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const expressLayout = require('express-ejs-layouts')
+const methodOverride=require('method-override')
 const flash=require('connect-flash')
 const session=require('express-session')
 const connectDB=require('./server/config/db')
@@ -15,6 +16,7 @@ connectDB();
 //To pass data through forms
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride('_method'))
 
 // Static Files
 app.use(express.static('public'));

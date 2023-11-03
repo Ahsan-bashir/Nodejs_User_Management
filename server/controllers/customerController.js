@@ -282,7 +282,7 @@ exports.postCustomer = async (req, res) => {
     }
 }
 
-// GETx
+// GET
 // view customer data
 exports.view = async (req, res) => {
 try {
@@ -292,6 +292,27 @@ try {
         description:"Nodejs User Mangement System",
     };
     res.render('customer/view',{
+        locals,
+        customer
+    })
+} catch (error) {
+    console.log(error);
+}
+
+}
+
+
+
+// GET
+// edit customer data
+exports.edit = async (req, res) => {
+try {
+    const customer=await Customer.findOne({_id:req.params.id});
+    const locals={
+        title:"Edit Customer Data",
+        description:"Nodejs User Mangement System",
+    };
+    res.render('customer/edit',{
         locals,
         customer
     })

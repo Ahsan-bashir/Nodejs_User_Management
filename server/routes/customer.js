@@ -8,4 +8,5 @@ Router.get('/add',customerController.addCustomer)
 Router.post('/add',customerController.postCustomer)
 
 Router.get('/view/:id',customerController.view)
+Router.get('/edit/:id',customerController.edit)
 module.exports=Router;
