@@ -1,8 +1,10 @@
 <div class="d-flex justify-content-between flex-wrap nowrap flex-md align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Editing <%= customer.firstName%> <%= customer.lastName%></h1>
-    <div class="btn-toolbar mb-2 mb-md 0">
+    <h1 class="h2">Editing <%= customer.firstName %>
+            <%= customer.lastName %>
+    </h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
-            <a href="/add" class="btn btn-sm btn-ouline-secondary">?</a>
+            <a href="/add" class="btn btn-sm btn-outline-secondary">?</a>
         </div>
     </div>
 </div>
@@ -11,52 +13,88 @@
     <div class="row">
         <div class="col">
             <nav aria-label="breadcrumb">
-                <ul class="breadcrumb-item">
+                <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><%= customer.firstName%>  <%= customer.lastName%></li>
-                </ul>
+                    <li class="breadcrumb-item active">
+                        <%= customer.firstName %>
+                            <%= customer.lastName %>
+                    </li>
+                </ol>
             </nav>
         </div>
         <div class="col text-end fw-lighter">
-            <b>Last Updated : <%=new Data(customer.updatedAt).toUTCString() %></b>
-            <b>UserId : </b><%= customer._id %>
+            <b>Last Updated : <%= new Date(customer.updatedAt).toUTCString() %></b>
+            <b>UserId : <%= customer._id %></b>
         </div>
     </div>
 </div>
 
-<form action="/edit/<%= customer._id>?_method=PUT" method="POST">
+<form action="/edit/<%= customer._id %>?_method=PUT" method="POST">
     <!-- row 1 -->
     <div class="row form-group mb-4">
         <div class="col">
             <label for="firstName">First Name</label>
-            <input type="text" class="form-control" placeholder="First Name" id="firstName" name="firstName" value=""
-                required>
+            <input type="text" class="form-control" placeholder="First Name" id="firstName" name="firstName"
+                value="<%= customer.firstName %>" required>
         </div>
         <div class="col">
             <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" placeholder="Last Name" id="lastName" name="lastName" value=""
-                required>
+            <input type="text" class="form-control" placeholder="Last Name" id="lastName" name="lastName"
+                value="<%= customer.lastName %>" required>
         </div>
     </div>
     <!-- row 2 -->
     <div class="row form-group mb-4">
         <div class="col">
             <label for="tel">Telephone</label>
-            <input type="text" class="form-control" placeholder="Telephone" id="tel" name="tel" value="" required>
+            <input type="text" class="form-control" placeholder="Telephone" id="tel" name="tel"
+                value="<%= customer.tel %>" required>
         </div>
         <div class="col">
             <label for="email">Email</label>
-            <input type="email" class="form-control" placeholder="Email" id="email" name="email" value="" required>
+            <input type="email" class="form-control" placeholder="Email" id="email" name="email"
+                value="<%= customer.email %>" required>
         </div>
     </div>
     <!-- row 3 -->
     <div class="row form-group mb-4 ">
         <label for="details">Customer Details</label>
-        <textarea name="details" id="details" cols="30" rows="12" placeholder="Customer Details"></textarea>
+        <textarea name="details" id="details" cols="30" rows="12" placeholder="Customer Details">
+            <%= customer.details %>
+        </textarea>
     </div>
 
-
-        <button type="submit" class="btn btn-primary"> Add Customer</button>
-  
-
+    <button type="submit" class="btn btn-primary">Update Customer</button>
+    <button type="button" class="btn  btn-danger" data-bs-toggle="madal" id="deleteButton"
+        data-bs-target="#deleteModal">Delete Customer</button>
 </form>
+
+<!-- Alert Dialouge Box -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="madal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">You are about to delete customer record </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+            </div>
+            <div class="modal-body">
+                <p>This will remove the recored of <b class="fw-bold">
+                        <%= customer.firstName%>
+                            <%= customer.lastName%>
+                    </b>
+                    <br><br>
+                    Are you sure ?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form action="/edit/<%= customer._id %>?_method=DELETE" method="POST" class="position-relative">
+                    <button type="submit" class="btn btn-primary">Yes,Remove Customer</button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
