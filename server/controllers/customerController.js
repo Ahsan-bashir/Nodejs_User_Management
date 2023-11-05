@@ -342,3 +342,28 @@ try {
 }
 
 }
+
+
+// DELETE customer data
+exports.deleteCustomer = async (req, res) => {
+try {
+    await Customer.deleteOne({_id:req.params.id})
+    res.redirect('/');
+
+   await res.redirect(`/edit/${req.params.id}`);
+} catch (error) {
+    console.log(error);
+}
+
+}
+
+// GET
+// search customer data
+exports.searchCustomer = async (req, res) => {
+try {
+    let searchTerm=req.body.searchTerm;
+} catch (error) {
+    console.log(error);
+}
+
+}
